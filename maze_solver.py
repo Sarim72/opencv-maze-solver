@@ -1,74 +1,33 @@
-# Maze solver using opencv
-
-You've probably come across maze puzzles in publications and news clips. Have you ever wondered if your computer can perform the task for you? So today we'll learn how to use opencv in Python to create a maze problem solver.
-Note- this code will work only for 10 x 10 maze but you can modify it according to your requirement.
-
-<br>
-
-<img src="https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/maze_solving_using_open_cv-main/images/maze00.jpg?token=AURIEWXVJCGEOHIRGD2QBWTBUYQWC" alt="before" style="width: 47%; float: left; margin-right:6%">
-
-<img src="./images/maze_image_after_algorithm.jpg" alt="before" style="width: 47%;">
-     
-
-
-
-
-
-
-
-
-
-
-                   
-So lets start by importing the libraries
-```
 import cv2
 import numpy as np
-``` 
-       
 
 
-Now we read the images ,apply perspective transform to this image and resize it to 400 X 400.
 
-So what does perspective transform do??
-Well,We can shift the perspective of a given image or video using Perspective Transformation to gain greater insights into the required information. We need to specify the points on the image from which we wish to obtain information by changing the perspective in Perspective Transformation. We must also supply the points inside which we want our image to be displayed. The perspective transform is then computed from the two sets of points and wrapped around the original image.
-
-                  
-
-
-So as you can see above this function does three things-
-1. isolate the maze form the border.
-2. resize the maze into 400 X 400 (in pixels).
-3. it removes the colour channel of the image.
-
-
-Here is the code
-```
 def applyPerspectiveTransform(input_img):
- 
+
     """
     Purpose:
     ---
-    takes a maze test case image as input and applies a Perspective           Transfrom on it to isolate the maze
- 
+    takes a maze test case image as input and applies a Perspective Transfrom on it to isolate the maze
+
     Input Arguments:
     ---
     `input_img` :   [ numpy array ]
         maze image in the form of a numpy array
- 
+
     Returns:
     ---
     `warped_img` :  [ numpy array ]
         resultant warped maze image after applying Perspective Transform
- 
+
     Example call:
     ---
     warped_img = applyPerspectiveTransform(input_img)
     """
     
- 
+
     warped_img = None
- 
+
     ##############  ADD YOUR CODE HERE  ##############
    
     def changed(img):
@@ -84,7 +43,7 @@ def applyPerspectiveTransform(input_img):
             if area >5000:
                 peri = cv2.arcLength(i,True)
                 approx = cv2.approxPolyDP(i,0.02 * peri,True)
- 
+
                 if area >max_area and len(approx) ==4:
                     biggest = approx
                     max_area = area
@@ -121,85 +80,31 @@ def applyPerspectiveTransform(input_img):
     ##############################
     
     return thresh,imgWarpColored
-```
- 
 
-
-
-Once we have the isolated maze image . now we have to form a maze array.
-## For this we have to read maze block by block
-
-<br>
-
-<img src="./images/left.jpg" alt="before" style="width:50px; float: left;margin-right:7px">
-
-
-when maze is on the left   then Edge = 2<sup>0</sup> =1
-
-<br>
-<br>
-<img src="./images/up.jpg" alt="before" style="width:50px; float: left;margin-right:7px">
-
-when maze is up then Edge = 2<sup>1</sup> = 2
-<br>
-<br>
-<br>
-            
-<img src="./images/right.JPG" alt="before" style="width:50px; float: left;margin-right:7px">        
-when maze is on the right then Edge = 2<sup>2</sup>=4
-<br>
-<br>
-<br> 
-<img src="./images/down.JPG" alt="before" style="width:50px; float: left;margin-right:7px">  
-
-when maze is down then Edge = 2<sup>3</sup>=8
-
-<br>
-
-Now lets combine this rule
-
-
-<img src="./images/example 1.JPG" alt="before" style="width:50px; float: left;margin-right:7px">
-
-In this case we have maze on UP,LEFT,DOWN So Edge= 2<sup>0</sup>+2<sup>1</sup>+2<sup>3</sup>=11
-
-<br>
-
-### Similarly
-<img src="./images/example 2.JPG" alt="before" style="width:50px; float: left;margin-right:7px">
-
-Edge = 2<sup>2</sup>+2<sup>3</sup>=12
-
-<br>
-Now lets code this
-<br>
-
-
-```
 def detectMaze(warped_img):
- 
+
     """
     Purpose:
     ---
     takes the warped maze image as input and returns the maze encoded in form of a 2D array
- 
+
     Input Arguments:
     ---
     `warped_img` :    [ numpy array ]
         resultant warped maze image after applying Perspective Transform
- 
+
     Returns:
     ---
     `maze_array` :    [ nested list of lists ]
         encoded maze in the form of a 2D array
- 
+
     Example call:
     ---
     maze_array = detectMaze(warped_img)
     """
- 
+
     maze_array = []
- 
+
     ##############  ADD YOUR CODE HERE  ##############
     for i in range(20,380,40):
         llt = []
@@ -225,7 +130,7 @@ def detectMaze(warped_img):
         for j in range(0,10):
             if (maze_array[i][j]==4) or (maze_array[i][j]==5):
                 maze_array[i][j+1]=maze_array[i][j+1] +1
- 
+
     v_maze =[]
     for i in range(20,380,40):
         llt = []
@@ -251,12 +156,12 @@ def detectMaze(warped_img):
         for j in range(0,10):
             if (v_maze[i][j]==8) or (v_maze[i][j]==10):
                 v_maze[i+1][j]=v_maze[i+1][j]+2
- 
+
     matrix = np.zeros((10,10),dtype=np.int32)
     for i in range(10):
         for j in range(10):
             matrix[i][j] = maze_array[i][j] + v_maze[i][j]
- 
+
     for i in range(10):
         matrix[0][i] = matrix[0][i] +2
         matrix[9][i] = matrix[9][i] + 8
@@ -269,32 +174,8 @@ def detectMaze(warped_img):
     print("this is maze_array :",maze_array)
     ##################################################
     return maze_array
-```
-
-### The above code returns the Maze array
-
-<img src="./images/maze_array.JPG" alt="before" style="width:;height:120px; float: left;margin-right:7px">
-
-<br>
-<br>
 
 
-Now solving the maze has come down to solving the maze array
-
-
-We can solve this maze using various algorithm but i will use backtracking as it is easy to understand.
-<img src="./images/Backtracking.png" alt="before" style="width:; float: left">
-<br>
-
-
-
-
-
-Backtracking is an algorithmic strategy for recursively solving problems by attempting to develop a solution progressively, one piece at a time, and discarding any solutions that do not satisfy the problem's criteria at any point in time.
-
-
-
-```
 
 def find_path(maze_array, start_coord, end_coord):
     """
@@ -302,15 +183,15 @@ def find_path(maze_array, start_coord, end_coord):
     ---
     Takes a maze array as input and calculates the path between the
     start coordinates and end coordinates.
- 
+
     Input Arguments:
     ---
     `maze_array` :   [ nested list of lists ]
         encoded maze in the form of a 2D array
- 
+
     `start_coord` : [ tuple ]
         start coordinates of the path
- 
+
     `end_coord` : [ tuple ]
         end coordinates of the path
     
@@ -323,9 +204,9 @@ def find_path(maze_array, start_coord, end_coord):
     ---
     path = find_path(maze_array, start_coord, end_coord)
     """
+
  
- 
- 
+
     ################# ADD YOUR CODE HERE #################
     sp = []
     rec = [0]
@@ -348,7 +229,7 @@ def find_path(maze_array, start_coord, end_coord):
     
        h,w = sp[p][0],sp[p][1]
      
- 
+
        if(sp[-1]==final_point ):
           
             break
@@ -399,7 +280,7 @@ def find_path(maze_array, start_coord, end_coord):
      
      
        else:
-    #Removing the coordinates that are closed or don't show any path   
+#Removing the coordinates that are closed or don't show any path   
           sp.pop()
       
           rec.pop()
@@ -412,27 +293,17 @@ def find_path(maze_array, start_coord, end_coord):
     if(sp!=None):
        for i in range (0,len(sp)):
            hi.append((sp[i][0],sp[i][1]))
- 
+
     else:
         hi=None
- 
- 
- 
+
+
+
     ######################################################
     print('this is the path_coordinate :',hi)
     return hi
+    
 
-
-```
-The variable hi give us the list of (x,y) coordinate which we can use to highlight the path.
-
-<img src="./images/solved_maze_coordinate.JPG" alt="before" style="height :120px; float: left;margin-right:7px">
-
-
-
-Now lets highlight the path using this function
-
-```
 def pathHighlight(img, ip, fp, path):
    CELL_SIZE = 40
    er=[]
@@ -449,13 +320,7 @@ def pathHighlight(img, ip, fp, path):
      t = cv2.circle(t,(a,b) , 5, (0,0,255) , -1)
   
    return img
-
-```
-This function will return
-
-
-
-<img src="./images/maze_image_after_algorithm.JPG" alt="before" style="; float: left;margin-right:7px">
+  
 
 
 
@@ -465,4 +330,18 @@ This function will return
 
 
 
-            
+img=cv2.imread('C:/Users/91798/Desktop/E yantra/task_4a_path_planning_windows/New folder/maze00.jpg',-1) #reading the image
+warped_img,warped_img_colored=applyPerspectiveTransform(img) #finding the edge coordinate of the image and applying wrap_prespective
+cv2.imshow('maze before the algorithm',warped_img_colored)
+maze_array=detectMaze(warped_img)   #using certain rule to divide the maze into a 2d array
+
+# for i in range(0,10):
+#     for j in range(0,10):
+#         maze_array[i][j]=15-maze_array[i][j]
+
+
+path_of_maze=find_path(maze_array,(0,4),(9,5))
+final_image=pathHighlight(warped_img_colored,(0,4),(9,5),path_of_maze)
+cv2.imshow('maze_image_after_algorithm',final_image)
+
+cv2.waitKey(0)
