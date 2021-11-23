@@ -5,9 +5,16 @@ Note- this code will work only for 10 x 10 maze but you can modify it according 
 
 <br>
 
-<img src="https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/maze_solving_using_open_cv-main/images/maze00.jpg?token=AURIEWXVJCGEOHIRGD2QBWTBUYQWC" alt="before" style="width: 47%; float: left; margin-right:6%">
+<!-- <img src="https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/maze_solving_using_open_cv-main/images/maze00.jpg?token=AURIEWXVJCGEOHIRGD2QBWTBUYQWC" alt="before" style="width: 47%; float: left; margin-right:6%"> -->
+<p align = "center">
 
-<img src="./images/maze_image_after_algorithm.jpg" alt="before" style="width: 47%;">
+  <img src = "https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/maze_solving_using_open_cv-main/images/maze00.jpg?token=AURIEWXVJCGEOHIRGD2QBWTBUYQWC" width=400>
+
+  <img src = "./images/maze_image_after_algorithm.jpg" width=400>
+
+</p>
+
+<!-- <img src="./images/maze_image_after_algorithm.jpg" alt="before" style="width: 47%;"> -->
      
 
 
