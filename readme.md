@@ -131,14 +131,14 @@ Once we have the isolated maze image . now we have to form a maze array.
 
 <br>
 
-<img src="./images/left.jpg" alt="before" style="width:50px; float: left;margin-right:7px">
+<img src="https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/images/left.JPG?token=AURIEWQNOIL2JJDS5RDMZSDBUYSRA" alt="before" style="width:50px; float: left;margin-right:7px">
 
 
 when maze is on the left   then Edge = 2<sup>0</sup> =1
 
 <br>
 <br>
-<img src="./images/up.jpg" alt="before" style="width:50px; float: left;margin-right:7px">
+<img src="https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/images/up.JPG?token=AURIEWREAT56J47AZFPVGH3BUYSUC" alt="before" style="width:50px; float: left;margin-right:7px">
 
 when maze is up then Edge = 2<sup>1</sup> = 2
 <br>
@@ -455,7 +455,7 @@ This function will return
 
 
 
-<img src="./images/maze_image_after_algorithm.JPG" alt="before" style="; float: left;margin-right:7px">
+<img src="https://raw.githubusercontent.com/Sarim72/opencv-maze-solver/main/images/maze_image_after_algorithm.jpg?token=AURIEWTRFBPKCLESKVWCYSDBUYSWG" alt="before" style="; float: left;margin-right:7px">
 
 
 
