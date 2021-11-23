@@ -44,7 +44,7 @@ Well,We can shift the perspective of a given image or video using Perspective Tr
 
 
 So as you can see above this function does three things-
-1. isolate the maze form the border.
+1. isolate the maze from the border.
 2. resize the maze into 400 X 400 (in pixels).
 3. it removes the colour channel of the image.
 
