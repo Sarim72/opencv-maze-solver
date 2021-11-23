@@ -1,6 +1,6 @@
 # Maze solver using opencv
 
-You've probably come across maze puzzles in publications and news clips. Have you ever wondered if your computer can perform the task for you? So today we'll learn how to use opencv in Python to create a maze problem solver.
+You've probably come across maze puzzles in magazines and news clips. Have you ever wondered if your computer can perform the task for you? So today we'll learn how to use opencv in Python to create a maze problem solver.
 Note- this code will work only for 10 x 10 maze but you can modify it according to your requirement.
 
 <br>
